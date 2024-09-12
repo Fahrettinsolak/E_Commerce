@@ -1,8 +1,5 @@
 # E-Ticaret Mikroservis Projesi
 
-[![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)  
-[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](https://github.com/yourusername/your-repo/actions)  
-[![Docker Pulls](https://img.shields.io/docker/pulls/yourrepo/ecommerce.svg)](https://hub.docker.com/r/yourrepo/ecommerce)  
 
 ## İçindekiler
 - [Genel Bakış](#genel-bakış)

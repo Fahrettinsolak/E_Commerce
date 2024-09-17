@@ -7,12 +7,15 @@ namespace E_Commerce.Catalog.Entities
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string ProductID { get; set; }
+        public string ProductId { get; set; }
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
         public string ProductImageUrl { get; set; }
         public string ProductDescription { get; set; }
-        public string CategoryID { get; set; }
+
+        [BsonRepresentation(BsonType.ObjectId)]
+        public string CategoryId { get; set; }
+
         [BsonIgnore]
         public Category Category { get; set; }
 

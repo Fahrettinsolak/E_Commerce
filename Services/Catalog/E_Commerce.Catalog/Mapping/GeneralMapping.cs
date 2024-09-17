@@ -4,6 +4,7 @@ using E_Commerce.Catalog.Dtos.CategoryDtos;
 using E_Commerce.Catalog.Dtos.ProductDtos;
 using E_Commerce.Catalog.Dtos.ProductDetailDtos;
 using E_Commerce.Catalog.Dtos.ProductImageDtos;
+using E_Commerce.Catalog.Dtos.FeatureSliderDtos;
 
 namespace E_Commerce.Catalog.Mapping
 {
@@ -32,6 +33,11 @@ namespace E_Commerce.Catalog.Mapping
             CreateMap<ProductImage, GetByIdProductImageDto>().ReverseMap();
 
             CreateMap<Product, ResultProductsWithCategoryDto>().ReverseMap();
+
+            CreateMap<FeatureSlider, ResultFeatureSliderDto>().ReverseMap();
+            CreateMap<FeatureSlider, CreateFeatureSliderDto>().ReverseMap();
+            CreateMap<FeatureSlider, UpdateFeatureSliderDto>().ReverseMap();
+            CreateMap<FeatureSlider, GetByIdFeatureSliderDto>().ReverseMap();
 
         }   
     }

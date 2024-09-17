@@ -38,6 +38,25 @@ namespace E_Commerce.WebUI.Areas.Admin.Controllers
 
             return View();
         }
+        [Route("ProductListWithCategory")]
+        public async Task<IActionResult> ProductListWithCategory()
+        {
+            ViewBag.V1 = "Ana Sayfa";
+            ViewBag.V2 = "Ürünler";
+            ViewBag.V3 = "Ürün Listesi";
+            ViewBag.v0 = "Ürün İşlemleri";
+
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync("https://localhost:7060/api/Products/ProductListWithCategory");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<List<ResultProductWithCategoryDto>>(jsonData);
+                return View(values);
+            }
+
+            return View();
+        }
         [Route("CreateProduct")]
         [HttpGet]
         public async Task<IActionResult> CreateProduct()

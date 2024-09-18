@@ -16,26 +16,6 @@ namespace E_Commerce.WebUI.Areas.Admin.Controllers
             _httpClientFactory = httpClientFactory;
         }
         [Route("Index")]
-
-        //public async Task<IActionResult> Index()
-        //{
-        //    ViewBag.V1 = "Ana Sayfa";
-        //    ViewBag.V2 = "Öne Çıkan Görseller";
-        //    ViewBag.V3 = "Öne Çıkan Görsel Listesi";
-        //    ViewBag.v0 = "Öne Çıkan Görsel Slider İşlemleri";
-
-        //    var client = _httpClientFactory.CreateClient();
-        //    var responseMessage = await client.GetAsync("https://localhost:7060/api/FeatureSliders");
-        //    List<ResultFeatureSliderDto> values = new List<ResultFeatureSliderDto>(); // Boş model oluştur
-
-        //    if (responseMessage.IsSuccessStatusCode)
-        //    {
-        //        var jsonData = await responseMessage.Content.ReadAsStringAsync();
-        //        values = JsonConvert.DeserializeObject<List<ResultFeatureSliderDto>>(jsonData);
-        //    }
-
-        //    return View(values); // Model her durumda boş da olsa döndürülmeli
-        //}
         public async Task<IActionResult> Index()
         {
             ViewBag.V1 = "Ana Sayfa";
@@ -44,7 +24,7 @@ namespace E_Commerce.WebUI.Areas.Admin.Controllers
             ViewBag.v0 = "Öne Çıkan Görsel Slider İşlemleri";
 
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7060/api/FeatureSliders");
+            var responseMessage = await client.GetAsync("https://localhost:7060/api/FeatureSlider");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -72,7 +52,7 @@ namespace E_Commerce.WebUI.Areas.Admin.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createFeatureSliderDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PostAsync("https://localhost:7060/api/FeatureSliders", stringContent);
+            var responseMessage = await client.PostAsync("https://localhost:7060/api/FeatureSlider", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "FeatureSlider", new { area = "Admin" });
@@ -83,7 +63,7 @@ namespace E_Commerce.WebUI.Areas.Admin.Controllers
         public async Task<IActionResult> DeleteFeatureSlider(string id)
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.DeleteAsync("https://localhost:7060/api/FeatureSliders?id=" + id);
+            var responseMessage = await client.DeleteAsync("https://localhost:7060/api/FeatureSlider?id=" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "FeatureSlider", new { area = "Admin" });
@@ -99,7 +79,7 @@ namespace E_Commerce.WebUI.Areas.Admin.Controllers
             ViewBag.V3 = "Öne Çıkan Görsel Güncelleme Sayfası ";
             ViewBag.v0 = "Öne Çıkan Görsel Slider İşlemleri";
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("https://localhost:7060/api/FeatureSliders/" + id);
+            var responseMessage = await client.GetAsync("https://localhost:7060/api/FeatureSlider/" + id);
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
@@ -115,7 +95,7 @@ namespace E_Commerce.WebUI.Areas.Admin.Controllers
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateFeatureSliderDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
-            var responseMessage = await client.PutAsync("https://localhost:7060/api/FeatureSliders/", stringContent);
+            var responseMessage = await client.PutAsync("https://localhost:7060/api/FeatureSlider/", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
                 return RedirectToAction("Index", "FeatureSlider", new { area = "Admin" });

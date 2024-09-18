@@ -5,6 +5,9 @@ using E_Commerce.Catalog.Dtos.ProductDtos;
 using E_Commerce.Catalog.Dtos.ProductDetailDtos;
 using E_Commerce.Catalog.Dtos.ProductImageDtos;
 using E_Commerce.Catalog.Dtos.FeatureSliderDtos;
+using E_Commerce.Catalog.Dtos.SpecialOfferDtos;
+using E_Commerce.Catalog.Dtos.FeatureDtos;
+using E_Commerce.Catalog.Dtos.OfferDiscountDtos;
 
 namespace E_Commerce.Catalog.Mapping
 {
@@ -38,6 +41,21 @@ namespace E_Commerce.Catalog.Mapping
             CreateMap<FeatureSlider, CreateFeatureSliderDto>().ReverseMap();
             CreateMap<FeatureSlider, UpdateFeatureSliderDto>().ReverseMap();
             CreateMap<FeatureSlider, GetByIdFeatureSliderDto>().ReverseMap();
+
+            CreateMap<SpecialOffer, ResultSpecialOfferDto>().ReverseMap();
+            CreateMap<SpecialOffer, CreateSpecialOfferDto>().ReverseMap();
+            CreateMap<SpecialOffer, UpdateSpecialOfferDto>().ReverseMap();
+            CreateMap<SpecialOffer, GetByIdSpecialOfferDto>().ReverseMap();
+
+            CreateMap<Feature, ResultFeatureDto>().ReverseMap();
+            CreateMap<Feature, CreateFeatureDto>().ReverseMap();
+            CreateMap<Feature, UpdateFeatureDto>().ReverseMap();
+            CreateMap<Feature, GetByIdFeatureDto>().ReverseMap();
+
+            CreateMap<OfferDiscount, ResultOfferDiscountDto>().ReverseMap();
+            CreateMap<OfferDiscount, CreateOfferDiscountDto>().ReverseMap();
+            CreateMap<OfferDiscount, UpdateOfferDiscountDto>().ReverseMap();
+            CreateMap<OfferDiscount, GetByIdOfferDiscountDto>().ReverseMap();
 
         }   
     }

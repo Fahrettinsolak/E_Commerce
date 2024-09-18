@@ -1,8 +1,11 @@
 using E_Commerce.Catalog.Services.CategoryServices;
+using E_Commerce.Catalog.Services.FeatureServices;
 using E_Commerce.Catalog.Services.FeatureSliderServices;
+using E_Commerce.Catalog.Services.OfferDiscountServices;
 using E_Commerce.Catalog.Services.ProductDetailDetailServices;
 using E_Commerce.Catalog.Services.ProductImageImageServices;
 using E_Commerce.Catalog.Services.ProductServices;
+using E_Commerce.Catalog.Services.SpecialOfferSevices;
 using E_Commerce.Catalog.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
@@ -22,6 +25,9 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IProductDetailService, ProductDetailService>();
 builder.Services.AddScoped<IProductImageService, ProductImageService>();
 builder.Services.AddScoped<IFeatureSliderService, FeatureSliderService>();
+builder.Services.AddScoped<ISpecialOfferService, SpecialOfferService>();
+builder.Services.AddScoped<IFeatureService, FeatureService>();
+builder.Services.AddScoped<IOfferDiscountService, OfferDiscountService>();
 
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection("DatabaseSettings"));

@@ -1,6 +1,12 @@
-﻿namespace E_Commerce.Catalog.Dtos.ProductImageDtos
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace E_Commerce.DtoLayer.CatalogDtos.ProductImageDtos
 {
-    public class UpdateProductImageDto
+    public class GetByIdProductImageDto
     {
         public string ProductImageID { get; set; }
         public string Image1 { get; set; }

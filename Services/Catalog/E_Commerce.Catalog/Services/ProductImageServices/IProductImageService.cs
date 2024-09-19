@@ -9,5 +9,6 @@ namespace E_Commerce.Catalog.Services.ProductImageImageServices
         Task UpdateProductImageDtoAsync(UpdateProductImageDto updateProductImageDto);
         Task DeleteProductImageDtoAsync(string id);
         Task<GetByIdProductImageDto> GetByIdProductImageAsync(string id);
+        Task<GetByIdProductImageDto> GetByProductIdProductImageAsync(string id);
     }
 }

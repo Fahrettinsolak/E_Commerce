@@ -21,6 +21,12 @@ namespace E_Commerce.Catalog.Controllers
             var values = await _productDetailService.GetAllProductDetailAsync();
             return Ok(values);
         }
+        [HttpGet("GetProductDetailByProductId")]
+        public async Task<IActionResult> GetProductDetailByProductId(string id)
+        {
+            var value = await _productDetailService.GetByProductIdProductDetailAsync(id);
+            return Ok(value);
+        }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetProductDetailById(string id)
         {

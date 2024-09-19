@@ -9,6 +9,7 @@ using E_Commerce.Catalog.Dtos.SpecialOfferDtos;
 using E_Commerce.Catalog.Dtos.FeatureDtos;
 using E_Commerce.Catalog.Dtos.OfferDiscountDtos;
 using E_Commerce.Catalog.Dtos.BrandDtos;
+using E_Commerce.Catalog.Dtos.AboutDtos;
 
 namespace E_Commerce.Catalog.Mapping
 {
@@ -62,6 +63,11 @@ namespace E_Commerce.Catalog.Mapping
             CreateMap<Brand, CreateBrandDto>().ReverseMap();
             CreateMap<Brand, UpdateBrandDto>().ReverseMap();
             CreateMap<Brand, GetByIdBrandDto>().ReverseMap();
+
+            CreateMap<About, ResultAboutDto>().ReverseMap();
+            CreateMap<About, CreateAboutDto>().ReverseMap();
+            CreateMap<About, UpdateAboutDto>().ReverseMap();
+            CreateMap<About, GetByIdAboutDto>().ReverseMap();
 
         }   
     }

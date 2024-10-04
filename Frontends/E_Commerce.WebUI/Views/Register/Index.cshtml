@@ -1,0 +1,197 @@
+﻿@model CreateRegisterDto
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/colorlib-regform-7/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/colorlib-regform-7/css/style.css">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.875em;
+            display: none; /* Başlangıçta gizli */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main">
+
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Kayıt Ol</h2>
+                        <form method="post" class="register-form" id="register-form" onsubmit="return validateForm()">
+                            <div class="form-group">
+                                <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" asp-for="Name" id="name" placeholder="Adınız" />
+                                <span class="error-message" id="name-error">Lütfen adınızı giriniz.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="surname"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" asp-for="Surname" id="surname" placeholder="Soyadınız" />
+                                <span class="error-message" id="surname-error">Lütfen soyadınızı giriniz.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" asp-for="Email" id="email" placeholder="Email Adresiniz" />
+                                <span class="error-message" id="email-error">Lütfen email adresinizi giriniz.</span>
+                                <span class="error-message" id="email-format-error">Geçerli bir email adresi giriniz.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="userName"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" asp-for="UserName" id="userName" placeholder="Kullanıcı Adınız" />
+                                <span class="error-message" id="userName-error">Lütfen Kulanıcı Adı giriniz.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="pass"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" asp-for="Password" id="pass" placeholder="Şifreniz" />
+                                <span class="error-message" id="pass-error">Lütfen şifrenizi giriniz.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" asp-for="ConfirmPassword" id="re_pass" placeholder="Şifrenizi Tekrar Giriniz" />
+                                <span class="error-message" id="repass-error">Lütfen şifrenizi tekrar giriniz.</span>
+                                <span class="error-message" id="mismatch-error">Şifreler uyuşmuyor!</span>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                <label for="agree-term" class="label-agree-term"><span><span></span></span><a href="#" class="term-service">Hizmet Şartları</a>'ındaki tüm ifadeleri kabul ediyorum.</label>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Kayıt Ol" />
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="~/colorlib-regform-7/images/signup-image.jpg" alt="sing up image"></figure>
+                        <a href="#" class="signup-image-link">Zaten üyeyim</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JS -->
+    <script src="~/colorlib-regform-7/vendor/jquery/jquery.min.js"></script>
+    <script src="~/colorlib-regform-7/js/main.js"></script>
+
+    <!-- Form validation script -->
+    <script>
+        function validateForm() {
+            let isValid = true;
+            
+            const name = document.getElementById("name").value.trim();
+            const surname = document.getElementById("surname").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const userName = document.getElementById("userName").value.trim();
+            const pass = document.getElementById("pass").value.trim();
+            const rePass = document.getElementById("re_pass").value.trim();
+            
+            // Email formatı için regex
+            const emailPattern = /^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/;
+
+            // Hata mesajlarını temizle
+            document.getElementById("name-error").style.display = "none";
+            document.getElementById("surname-error").style.display = "none";
+            document.getElementById("email-error").style.display = "none";
+            document.getElementById("email-format-error").style.display = "none";
+            document.getElementById("userName-error").style.display = "none";
+            document.getElementById("pass-error").style.display = "none";
+            document.getElementById("repass-error").style.display = "none";
+            document.getElementById("mismatch-error").style.display = "none";
+
+            if (name === "") {
+                document.getElementById("name-error").style.display = "block";
+                isValid = false;
+            }
+            if (surname === "") {
+                document.getElementById("surname-error").style.display = "block";
+                isValid = false;
+            }
+
+            if (email === "") {
+                document.getElementById("email-error").style.display = "block";
+                isValid = false;
+            } else if (!emailPattern.test(email)) {
+                document.getElementById("email-format-error").style.display = "block";
+                isValid = false;
+            }
+            if (userName === "") {
+                document.getElementById("userName-error").style.display = "block";
+                isValid = false;
+            }
+
+            if (pass === "") {
+                document.getElementById("pass-error").style.display = "block";
+                isValid = false;
+            }
+
+            if (rePass === "") {
+                document.getElementById("repass-error").style.display = "block";
+                isValid = false;
+            }
+
+            if (pass !== rePass && pass !== "" && rePass !== "") {
+                document.getElementById("mismatch-error").style.display = "block";
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        // Her input alanına event listener ekle
+        document.getElementById("name").addEventListener("input", function() {
+            if (this.value.trim() !== "") {
+                document.getElementById("name-error").style.display = "none";
+            }
+        });
+        document.getElementById("surname").addEventListener("input", function () {
+            if (this.value.trim() !== "") {
+                document.getElementById("surname-error").style.display = "none";
+            }
+        });
+
+        document.getElementById("email").addEventListener("input", function() {
+            if (this.value.trim() !== "") {
+                document.getElementById("email-error").style.display = "none";
+            }
+            if (/^[^\s@@]+@@[^\s@@]+\.[^\s@@]+$/.test(this.value.trim())) {
+                document.getElementById("email-format-error").style.display = "none";
+            }
+        });
+        document.getElementById("userName").addEventListener("input", function () {
+            if (this.value.trim() !== "") {
+                document.getElementById("userName-error").style.display = "none";
+            }
+        });
+
+        document.getElementById("pass").addEventListener("input", function() {
+            if (this.value.trim() !== "") {
+                document.getElementById("pass-error").style.display = "none";
+            }
+        });
+
+        document.getElementById("re_pass").addEventListener("input", function() {
+            if (this.value.trim() !== "") {
+                document.getElementById("repass-error").style.display = "none";
+            }
+            if (document.getElementById("pass").value.trim() === this.value.trim()) {
+                document.getElementById("mismatch-error").style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

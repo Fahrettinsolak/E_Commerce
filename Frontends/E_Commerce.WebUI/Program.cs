@@ -1,6 +1,26 @@
+using E_Commerce.WebUI.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme,
+    opt =>
+    {
+        opt.LoginPath = "/Login/Index";
+        opt.LogoutPath = "/Login/Logout";
+        opt.AccessDeniedPath = "/Pages/AccessDenied";
+        opt.Cookie.HttpOnly = true;
+        opt.Cookie.SameSite= SameSiteMode.Strict;
+        opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
+        opt.Cookie.Name = "E_CommerceJwt";
+    });
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<ILoginService, LoginService>();
+
 builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
 
@@ -19,6 +39,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

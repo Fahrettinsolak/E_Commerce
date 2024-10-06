@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.Catalog.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    [AllowAnonymous]
     public class ContactsController : ControllerBase
     {
         private readonly IContactService _ContactService;

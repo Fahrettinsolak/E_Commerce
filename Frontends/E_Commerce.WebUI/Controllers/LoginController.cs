@@ -1,5 +1,6 @@
 ﻿using E_Commerce.DtoLayer.IdentityDtos.LoginDtos;
 using E_Commerce.WebUI.Models;
+using E_Commerce.WebUI.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +14,12 @@ namespace E_Commerce.WebUI.Controllers
     public class LoginController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly ILoginService _loginService;
 
-        public LoginController(IHttpClientFactory httpClientFactory)
+        public LoginController(IHttpClientFactory httpClientFactory, ILoginService loginService)
         {
             _httpClientFactory = httpClientFactory;
+            _loginService = loginService;
         }
         [HttpGet]
         public IActionResult Index()
@@ -52,6 +55,7 @@ namespace E_Commerce.WebUI.Controllers
                             IsPersistent = true
                         };
                         await HttpContext.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), authProps);
+                        var id = _loginService.GetUserId;
                         return RedirectToAction("Index", "Default");
                     }
                 }

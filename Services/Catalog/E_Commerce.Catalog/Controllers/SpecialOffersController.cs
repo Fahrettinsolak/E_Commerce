@@ -1,11 +1,13 @@
 ﻿
 using E_Commerce.Catalog.Dtos.SpecialOfferDtos;
 using E_Commerce.Catalog.Services.SpecialOfferSevices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.Catalog.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class SpecialOffersController : ControllerBase

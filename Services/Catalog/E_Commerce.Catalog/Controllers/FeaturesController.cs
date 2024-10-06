@@ -1,10 +1,12 @@
 ﻿using E_Commerce.Catalog.Dtos.FeatureDtos;
 using E_Commerce.Catalog.Services.FeatureServices;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace E_Commerce.Catalog.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class FeaturesController : ControllerBase

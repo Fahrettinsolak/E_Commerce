@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text.Json.Nodes;
 
 namespace E_Commerce.WebUI.Controllers
@@ -16,9 +17,8 @@ namespace E_Commerce.WebUI.Controllers
         }
         public async Task<IActionResult> Index()
         {
-
-            string token;
-            using(var httpClient = new HttpClient())
+            string token="";
+            using (var httpClient = new HttpClient())
             {
                 var request = new HttpRequestMessage
                 {
@@ -26,12 +26,12 @@ namespace E_Commerce.WebUI.Controllers
                     Method = HttpMethod.Post,
                     Content = new FormUrlEncodedContent(new Dictionary<string, string>
                     {
-                        {"client_id","E_CommerceVisitorId"},
-                        {"client_secret","e_commercesecret"},
-                        {"grant_type","client_credentials"}
+                         {"client_id","E_CommerceVisitorId"},
+                         {"client_secret","e_commercesecret"},
+                         {"grant_type","client_credentials"}
                     })
                 };
-                using(var response = await httpClient.SendAsync(request))
+                using (var response = await httpClient.SendAsync(request))
                 {
                     if (response.IsSuccessStatusCode)
                     {
@@ -41,9 +41,8 @@ namespace E_Commerce.WebUI.Controllers
                     }
                 }
             }
-
-
             var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var responseMessage = await client.GetAsync("https://localhost:7060/api/Categories");
             if (responseMessage.IsSuccessStatusCode)
             {

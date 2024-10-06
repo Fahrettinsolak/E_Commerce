@@ -21,6 +21,7 @@ namespace E_Commerce.WebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(CreateContactDto createContactDto)
         {
+
             createContactDto.IsRead = false;
             createContactDto.SendDate = DateTime.Now;
             var client = _httpClientFactory.CreateClient();

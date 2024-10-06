@@ -18,6 +18,10 @@ namespace E_Commerce.IdentityServer
             new ApiResource("ResourceOrder"){ Scopes = { "OrderFullPermission"} },
             new ApiResource("ResourceCargo"){ Scopes = { "CargoFullPermission"} },
             new ApiResource("ResourceBasket"){ Scopes = { "BasketFullPermission"} },
+            new ApiResource("ResourceComment"){ Scopes = { "CommentFullPermission" } },
+            new ApiResource("ResourcePayment"){ Scopes = { "PaymentFullPermission" } },
+            new ApiResource("ResourceImages"){ Scopes = { "ImagesFullPermission" } },
+            new ApiResource("ResourceOcelot"){ Scopes = { "OcelotFullPermission" } },
             new ApiResource(IdentityServerConstants.LocalApi.ScopeName)
         };
         public static IEnumerable<IdentityResource> IdentityResources => new IdentityResource[]
@@ -34,6 +38,10 @@ namespace E_Commerce.IdentityServer
             new ApiScope("OrderFullPermission", "Full authority for order operations"),
             new ApiScope("CargoFullPermission", "Full authority for cargo operations"),
             new ApiScope("BasketFullPermission", "Full authority for basket operations"),
+            new ApiScope("CommentFullPermission", "Full authority for comment operations"),
+            new ApiScope("PaymentFullPermission", "Full authority for payment operations"),
+            new ApiScope("ImagesFullPermission", "Full authority for images operations"),
+            new ApiScope("OcelotFullPermission", "Full authority for ocelot operations"),
             new ApiScope(IdentityServerConstants.LocalApi.ScopeName)
 
         };
@@ -46,7 +54,8 @@ namespace E_Commerce.IdentityServer
                 ClientName="E_Commerce Client User",
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 ClientSecrets = { new Secret("e_commercesecret".Sha256()) },
-                AllowedScopes = { "DiscountFullPermission", "CatalogReadPermission", "CatalogFullPermission" }
+                AllowedScopes = { "CatalogReadPermission", "CatalogFullPermission", "OcelotFullPermission",
+                    "CommentFullPermission", "PaymentFullPermission" , "ImagesFullPermission"}
             },
 
             //Manager Client
@@ -56,7 +65,8 @@ namespace E_Commerce.IdentityServer
                 ClientName="E_Commerce Manager User",
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                 ClientSecrets = { new Secret("e_commercesecret".Sha256()) },
-                AllowedScopes = { "CatalogReadPermission","CatalogFullPermission", "BasketFullPermission" }
+                AllowedScopes = { "CatalogReadPermission","CatalogFullPermission", "BasketFullPermission",
+                    "OcelotFullPermission", "CommentFullPermission","PaymentFullPermission","ImagesFullPermission" }
             },
 
             //Admin Client
@@ -67,7 +77,7 @@ namespace E_Commerce.IdentityServer
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                 ClientSecrets = { new Secret("e_commercesecret".Sha256()) },
                 AllowedScopes = { "CatalogReadPermission","CatalogFullPermission","DiscountFullPermission","OrderFullPermission",
-                 "CargoFullPermission","BasketFullPermission",
+                 "CargoFullPermission","BasketFullPermission","OcelotFullPermission","CommentFullPermission","PaymentFullPermission","ImagesFullPermission",
                 IdentityServerConstants.LocalApi.ScopeName,IdentityServerConstants.StandardScopes.Email,
                 IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile},
                 AccessTokenLifetime = 600

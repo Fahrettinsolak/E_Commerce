@@ -1,4 +1,8 @@
 using E_Commerce.WebUI.Services;
+using E_Commerce.WebUI.Services.Concrete;
+using E_Commerce.WebUI.Services.Interfaces;
+using E_Commerce.WebUI.Settings;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,21 +12,33 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddCookie(JwtBearerDefaults.AuthenticationScheme,
     opt =>
     {
-        opt.LoginPath = "/Login/Index";
-        opt.LogoutPath = "/Login/Logout";
-        opt.AccessDeniedPath = "/Pages/AccessDenied";
+        opt.LoginPath = "/Login/Index/";
+        opt.LogoutPath = "/Login/Logout/";
+        opt.AccessDeniedPath = "/Pages/AccessDenied/";
         opt.Cookie.HttpOnly = true;
         opt.Cookie.SameSite= SameSiteMode.Strict;
         opt.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
         opt.Cookie.Name = "E_CommerceJwt";
     });
 
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, opt =>
+    {
+        opt.LoginPath = "/Login/Index/";
+        opt.ExpireTimeSpan = TimeSpan.FromDays(5);
+        opt.Cookie.Name = "E_CommerceCookie";
+        opt.SlidingExpiration = true;
+    });
+
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<ILoginService, LoginService>();
-
+builder.Services.AddHttpClient<IIdentityService, IdentityService>();
 builder.Services.AddHttpClient();
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configure<ClientSettings>(builder.Configuration.GetSection("ClientSettings"));
+
 
 var app = builder.Build();
 

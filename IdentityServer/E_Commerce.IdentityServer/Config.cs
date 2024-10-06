@@ -66,7 +66,12 @@ namespace E_Commerce.IdentityServer
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                 ClientSecrets = { new Secret("e_commercesecret".Sha256()) },
                 AllowedScopes = { "CatalogReadPermission","CatalogFullPermission", "BasketFullPermission",
-                    "OcelotFullPermission", "CommentFullPermission","PaymentFullPermission","ImagesFullPermission" }
+                    "OcelotFullPermission", "CommentFullPermission","PaymentFullPermission","ImagesFullPermission",
+                    IdentityServerConstants.LocalApi.ScopeName,
+                    IdentityServerConstants.StandardScopes.Email,
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile
+                }
             },
 
             //Admin Client
@@ -77,9 +82,12 @@ namespace E_Commerce.IdentityServer
                 AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                 ClientSecrets = { new Secret("e_commercesecret".Sha256()) },
                 AllowedScopes = { "CatalogReadPermission","CatalogFullPermission","DiscountFullPermission","OrderFullPermission",
-                 "CargoFullPermission","BasketFullPermission","OcelotFullPermission","CommentFullPermission","PaymentFullPermission","ImagesFullPermission",
-                IdentityServerConstants.LocalApi.ScopeName,IdentityServerConstants.StandardScopes.Email,
-                IdentityServerConstants.StandardScopes.OpenId,IdentityServerConstants.StandardScopes.Profile},
+                 "CargoFullPermission","BasketFullPermission","OcelotFullPermission","CommentFullPermission",
+                    "PaymentFullPermission","ImagesFullPermission",
+                    IdentityServerConstants.LocalApi.ScopeName,
+                    IdentityServerConstants.StandardScopes.Email,
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Profile},
                 AccessTokenLifetime = 600
             },
             

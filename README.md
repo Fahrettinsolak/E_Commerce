@@ -1,115 +1,128 @@
-# E-Ticaret Mikroservis Projesi
+# E-Commerce Microservices Project
 
-
-## İçindekiler
-- [Genel Bakış](#genel-bakış)
-- [Kullanılan Teknolojiler](#kullanılan-teknolojiler)
-- [Mimari](#mimari)
-- [Kurulum](#kurulum)
-- [Özellikler](#özellikler)
-- [API Dokümantasyonu](#api-dokümantasyonu)
-- [Lisans](#lisans)
+## Contents
+- [Overview](#overview)
+- [Technologies Used](#technologies-used)
+- [Architecture](#architecture)
+- [Installation](#installation)
+- [Features](#features)
+- [API Documentation](#api-documentation)
+- [License](#license)
 
 ---
 
-## Genel Bakış
+## Overview
 
-Bu **E-Ticaret Mikroservis Projesi**, modern teknolojiler kullanılarak oluşturulmuş, ölçeklenebilir ve sürdürülebilir uygulamalar için sağlam bir mimariyi ortaya koyan kapsamlı bir sistemdir. Proje, **CQRS**, **Onion Architecture** ve **Repository Design Pattern** gibi en iyi uygulamaları hayata geçirirken, **Docker**, **Redis**, **MongoDB** ve **PostgreSQL** gibi güçlü araçlardan faydalanmaktadır.
+This **E-Commerce Microservices Project** is a comprehensive system that provides a robust architecture for scalable and sustainable applications built using modern technologies. The project implements best practices such as **CQRS**, **Onion Architecture** and **Repository Design Pattern**, while utilizing powerful tools such as **Docker**, **Redis**, **MongoDB** and **PostgreSQL**.
 
-Proje, **Google Drive ile entegre fotoğraf yükleme**, **JWT tabanlı kimlik doğrulama ve yetkilendirme** sağlamakta ve **SignalR** ile gerçek zamanlı iletişim imkanı sunmaktadır.
+The project provides **Google Drive integrated photo upload**, **JWT based authentication and authorization** and provides real-time communication with **SignalR**.
 
-## Kullanılan Teknolojiler
+## Technologies Used
 
 ### Backend
-- **Asp.Net Core**: API servislerinin temelini oluşturur.
-- **Dapper**: Veritabanı etkileşimleri için hafif ORM.
-- **Redis**: Performansı artırmak için cache mekanizması.
-- **MongoDB**: Yapılandırılmamış verileri yönetmek için NoSQL veritabanı.
-- **PostgreSQL**, **MSSQL**, **SQLite**: Yapılandırılmış veriler için ilişkisel veritabanları.
-- **Identity Server**: Kimlik doğrulama ve yetkilendirme yönetimi.
-- **Ocelot Gateway**: Mikroservisler arası routing ve yönetim için API Gateway.
-- **CQRS**: Okuma ve yazma işlemlerini ayırır.
-- **Mediator Design Pattern**: Servisler arasında temiz iletişim sağlamak için.
-- **Repository Design Pattern**: İş mantığı ve veritabanı işlemlerini soyutlamak için.
-- **JWT**: JWT tabanlı kimlik doğrulama ile API uç noktalarının güvenliği.
-- **SignalR**: Gerçek zamanlı veri akışı için.
-  
+- **Asp.Net Core**: Forms the basis of API services.
+- **Dapper**: Lightweight ORM for database interactions.
+- **Redis**: Cache mechanism to increase performance.
+- **MongoDB**: NoSQL database to manage unstructured data.
+- **PostgreSQL**, **MSSQL**, **SQLite**: Relational databases for structured data.
+- **Identity Server**: Authentication and authorization management.
+- **Ocelot Gateway**: API Gateway for routing and management between microservices.
+- **CQRS**: Separates read and write operations.
+- **Mediator Design Pattern**: To provide clean communication between services.
+- **Repository Design Pattern**: To abstract business logic and database operations.
+
+- **JWT**: To secure API endpoints with JWT-based authentication.
+
+- **SignalR**: For real-time data streaming.
+
 ### DevOps
-- **Docker**: Kolay dağıtım ve ortam tutarlılığı için konteynerleştirme.
-- **Swagger**: API dokümantasyonu ve test arayüzü.
-- **Postman**: API testleri ve geliştirme aracı.
+- **Docker**: Containerization for easy deployment and environment consistency.
 
-### Diğer
-- **Google Drive API**: Fotoğraf yüklemeleri için kullanılır.
-- **Ajax**: Frontend'den asenkron istekler için.
-- **Rapid API**: Harici API tüketimi.
+- **Swagger**: API documentation and testing interface.
 
-## Mimari
+- **Postman**: API testing and development tool.
 
-Sistem, katmanlar arası bağımsızlığı sağlamak amacıyla **Onion Architecture** mimarisini takip etmektedir.
+### Other
+- **Google Drive API**: Used for photo uploads.
 
-- **API Gateway**: İstemci ve servisler arasındaki iletişimi Ocelot ile yönetir.
-- **Mikroservisler**: Kullanıcı yönetimi, sipariş işleme, ürün yönetimi gibi sistemin belirli parçalarını ele alan servisler.
-- **Veritabanı Katmanı**: Servis ihtiyaçlarına göre **SQL** ve **NoSQL** veritabanları kullanılır.
-- **Cache**: Sıkça talep edilen veriler için **Redis** kullanılarak yanıt süreleri iyileştirilir.
-- **Güvenlik**: **Identity Server** ve **JWT Bearer Token** kullanılarak güvenlik sağlanır.
+- **Ajax**: For asynchronous requests from frontend.
 
-### CQRS Uygulaması
+- **Rapid API**: External API consumption.
 
-Proje, okuma ve yazma işlemlerini ayırmak için **CQRS (Command Query Responsibility Segregation)** desenini kullanır. Bu yaklaşım, ölçeklenebilirliği artırır ve karmaşık iş mantığını daha kolay yönetilebilir hale getirir.
+## Architecture
+
+The system follows the **Onion Architecture** architecture to ensure independence between layers.
+
+- **API Gateway**: Manages communication between clients and services with Ocelot.
+- **Microservices**: Services that handle specific parts of the system, such as user management, order processing, product management.
+
+- **Database Layer**: **SQL** and **NoSQL** databases are used depending on the service needs.
+
+- **Cache**: Response times are improved by using **Redis** for frequently requested data.
+
+- **Security**: Security is provided by using **Identity Server** and **JWT Bearer Token**.
+
+### CQRS Implementation
+
+The project uses the **CQRS (Command Query Responsibility Segregation)** pattern to separate read and write operations. This approach increases scalability and makes complex business logic easier to manage.
 
 ### Mediator Pattern
 
-**Mediator** deseni ile sistem, isteklerin iş mantığından ayrılmasını sağlar, bu da sistemi daha modüler ve sürdürülebilir hale getirir.
+With the **Mediator** pattern, the system separates requests from business logic, making the system more modular and maintainable.
 
-## Kurulum
+## Installation
 
-### Gereksinimler
+### Requirements
 - [.NET 6.0 SDK](https://dotnet.microsoft.com/download)
 - [Docker](https://www.docker.com/get-started)
 - [PostgreSQL](https://www.postgresql.org/download/)
 - [MongoDB](https://www.mongodb.com/try/download/community)
 
-### Yükleme
+### Installation
 
-1. Projeyi klonlayın:
-   ```bash
-   git clone https://github.com/Fahrettinsolak/E_Commerce.git
+1. Clone the project:
+```bash
+git clone https://github.com/Fahrettinsolak/E_Commerce.git
+```
 
-2. Proje dizinine gidin:
-   ```bash
-   cd E_Commerce
+2. Go to the project directory:
+```bash
+cd E_Commerce
+```
 
-3. Docker konteynerlerini oluşturup çalıştırın:
-   ```bash
-   docker-compose up --build
-   
-4. Veritabanı migrasyonlarını uygulayın:
-   ```bash
-   dotnet ef database update
-   
-5. Uygulama http://localhost:5000 adresinde çalışır durumda olacaktır.
+3. Create and run the Docker containers:
+```bash
+docker-compose up --build
+```
 
-### Ortam Değişkenleri
+4. Perform database migrations:
+```bash
+dotnet ef database update
+```
 
-Projeyi çalıştırmadan önce aşağıdaki **ortam değişkenlerinin** yapılandırıldığından emin olun:
+5. Implementation It will be up and running at http://localhost:5000.
 
-- **DB_CONNECTION_STRING**: PostgreSQL veya MSSQL için bağlantı dizesi.
-- **MONGO_CONNECTION_STRING**: MongoDB bağlantı dizesi.
-- **REDIS_CONNECTION_STRING**: Redis bağlantı dizesi.
-- **GOOGLE_DRIVE_API_KEY**: Google Drive entegrasyonu için API anahtarı.
+### Environment Variables
 
-## Özellikler
+Before running the project, make sure the following **environment variables** are configured:
 
-- **Kimlik Doğrulama ve Yetkilendirme**: JWT ve Identity Server kullanarak güvenli kimlik doğrulama.
-- **Fotoğraf Yükleme**: Sisteme doğrudan Google Drive'a fotoğraf yükleyebilme.
-- **Gerçek Zamanlı Bildirimler**: SignalR kullanarak gerçek zamanlı güncellemeler.
-- **API Gateway**: Ocelot ile merkezi routing.
-- **Postman Koleksiyonu**: Kolay test için önceden yapılandırılmış Postman istekleri.
-- **Swagger Entegrasyonu**: API için otomatik oluşturulan dokümantasyon.
+- **DB_CONNECTION_STRING**: Connection string for PostgreSQL or MSSQL.
+- **MONGO_CONNECTION_STRING**: MongoDB connection string.
+- **REDIS_CONNECTION_STRING**: Redis connection string.
+- **GOOGLE_DRIVE_API_KEY**: API key for Google Drive integration.
 
-## API Dokümantasyonu
+## Features
 
-API dokümantasyonu Swagger ile sunulmaktadır. Uygulama çalıştırıldıktan sonra aşağıdaki URL üzerinden Swagger arayüzüne ulaşabilirsiniz:
+- **Authentication and Authorization**: Secure authentication using JWT and Identity Server.
+- **Photo Upload**: Ability to upload photos directly to Google Drive in the system.
+- **Real-Time Notifications**: Real-time updates using SignalR.
+- **API Gateway**: Centralized routing with Ocelot.
+- **Postman Collection**: Pre-configured Postman requests for easy testing.
+
+- **Swagger Integration**: Auto-generated documentation for the API.
+
+## API Documentation
+
+API documentation is provided by Swagger. Once the application is running, you can access the Swagger interface via the following URL:
 
 - [Swagger](http://localhost:5000/swagger)
